@@ -83,7 +83,7 @@ func Run(opt *options.Options) error {
 	go srv.Run()
 
 	for !srv.Ready() {
-		klog.Infof("Wait for internal server ready")
+		klog.V(4).Infof("Wait for internal server ready")
 		time.Sleep(time.Second)
 	}
 
