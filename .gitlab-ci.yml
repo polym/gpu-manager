@@ -1,0 +1,14 @@
+stages:
+  - release
+
+docker-release:
+  stage: release
+  script:
+    - IMAGE_FILE=hub.upyun.com/platform/gpu-manger make img
+    - VERSION=$(<"${ROOT}/VERSION")
+    - docker login -u ${HUB_UPYUN_USER} -p ${HUB_UPYUN_PASSWORD} hub.upyun.com
+    - docker push $IMAGE_FILE:$VERSION
+  tags:
+    - builder
+  only:
+    - tags

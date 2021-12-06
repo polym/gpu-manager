@@ -99,7 +99,11 @@ func (t *NvidiaTree) Init(input string) {
 	err = t.parseFromString(input)
 
 	if err != nil {
-		klog.Fatalf("Can not initialize nvidia tree, err %s", err)
+		klog.Warningf("Can not initialize nvidia tree, err %s", err)
+		klog.Infof("No nvidia hardware was founded, so sleep and wait to exit ...")
+		for {
+			time.Sleep(time.Hour)
+		}
 	}
 }
 
